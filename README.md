@@ -1,10 +1,10 @@
-# Poise-Monit Cookbook
+# Monit Cookbook
 
-[![Build Status](https://img.shields.io/travis/poise/poise-monit.svg)](https://travis-ci.org/poise/poise-monit)
-[![Gem Version](https://img.shields.io/gem/v/poise-monit.svg)](https://rubygems.org/gems/poise-monit)
-[![Cookbook Version](https://img.shields.io/cookbook/v/poise-monit.svg)](https://supermarket.chef.io/cookbooks/poise-monit)
-[![Coverage](https://img.shields.io/codecov/c/github/poise/poise-monit.svg)](https://codecov.io/github/poise/poise-monit)
-[![Gemnasium](https://img.shields.io/gemnasium/poise/poise-monit.svg)](https://gemnasium.com/poise/poise-monit)
+[![Build Status](https://img.shields.io/travis/poise/poise-monit-compat.svg)](https://travis-ci.org/poise/poise-monit-compat)
+[![Gem Version](https://img.shields.io/gem/v/poise-monit-compat.svg)](https://rubygems.org/gems/poise-monit-compat)
+[![Cookbook Version](https://img.shields.io/cookbook/v/monit.svg)](https://supermarket.chef.io/cookbooks/monit)
+[![Coverage](https://img.shields.io/codecov/c/github/poise/poise-monit-compat.svg)](https://codecov.io/github/poise/poise-monit-compat)
+[![Gemnasium](https://img.shields.io/gemnasium/poise/poise-monit-compat.svg)](https://gemnasium.com/poise/poise-monit-compat)
 [![License](https://img.shields.io/badge/license-Apache_2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 A **deprecated** [Chef](https://www.chef.io/) cookbook to manage [Monit](https://mmonit.com/monit/).
@@ -14,7 +14,14 @@ A **deprecated** [Chef](https://www.chef.io/) cookbook to manage [Monit](https:/
 compatibility with the [previous `monit` cookbook](https://github.com/apsoto/monit/).
 Aside from critical fixes, no further development is planned.
 
+Compatibility is provided for existing attributes, recipes, and the `monitrc`
+definition (now a resource). Internal structure has changed so wrappers using
+`chef-rewind` may not be compatible.
+
 ## Recipes
+
+* `monit::default` – Install Monit. Included automatically by all other recipes.
+* `monit::postfix` – Create a Monit service to monitor Postfix.
 
 [todo]
 
