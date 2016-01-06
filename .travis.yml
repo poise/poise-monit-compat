@@ -1,0 +1,20 @@
+---
+sudo: false
+cache: bundler
+language: ruby
+rvm:
+- '2.2'
+addons:
+  apt:
+    packages:
+    - libgecode-dev
+env:
+  global:
+  - USE_SYSTEM_GECODE=true
+  - secure: Dufc0Srx4LQpRpC5I1q289DqTgDinTr+KyDeC09As1A6j6TcZdtvrHAEzuLUHLSdQODlORZQiin2Ub2FcxThv0t8fgOz6mP0zl5cri69V+xsIR7QcfzCQsyUCXWxvTQfrI3fRdfwY5yeHyBivsngwpY2wI6svqCFcvCs6NVI/9MtMrMU0jFnQfX3Q2wlNSDVpQ6HAFX5tyJyEe3h0RRF2KvXXW95Jd4VtjR/0rtjk9YiSDVy+LGSAT2T77FiC3SyGrCU4v0Oy5r/0V/UedHk+s8rXHhYhjBKG5atq/lb65U5ib3v86FECXJwOfu22ZoWsC4cxlVTF5GPrd3xm2ZYtZr1hZGGvLZqkgZNL6cEf9ExkcHvAxRN3Qtii3tYSwMf80IoMsTcZyk3aTLsfCJmOjDa+XHpRFhLFiPvntGNi3Ngzb7kcqDvoxzWLjNcbwm+phSLwA87h/kCJjKWi1DMBZ5DFPmUSd6LKRNXzWcV4qgmGSGv4holR3jk34rXebrsglNcMBaVjde9mTC2HVAQFxZTIjOssx96fJbFNMigXBvlUXOSzBoIBebY4RlkV4enmrQ6sG6o1ENuMlqlkb3AFekJoRlvUmG5uxF7QL2nrrQRwXFSMWCwAqzi74FJ58qIYs2b/6ISNNIFJBiV8DgqUbjI27+uY9uUMraVzYXodjQ=
+bundler_args: "--binstubs=$PWD/bin --jobs 3 --retry 3"
+script:
+- "./bin/rake travis"
+gemfile:
+- test/gemfiles/chef-12.gemfile
+- test/gemfiles/master.gemfile
