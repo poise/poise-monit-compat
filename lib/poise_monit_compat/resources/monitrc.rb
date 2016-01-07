@@ -61,7 +61,7 @@ module PoiseMonitCompat
       # @provides monitrc
       class Provider < Chef::Provider
         include Poise
-        provides(:monirc)
+        provides(:monitrc)
 
         # An `enable` action for `monitrc`.
         #
