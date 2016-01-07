@@ -16,3 +16,22 @@
 
 require 'serverspec'
 set :backend, :exec
+
+describe file('/usr/bin/monit') do
+  it { is_expected.to exist }
+  it { is_expected.to be_a_file }
+end
+
+describe file('/etc/monit/monitrc') do
+  it { is_expected.to exist }
+  it { is_expected.to be_a_file }
+end
+
+describe command('monit -c /etc/monit/monitrc -V') do
+  its(:exit_status) { is_expected.to eq 0 }
+end
+
+describe command('monit -c /etc/monit/monitrc status') do
+  its(:exit_status) { is_expected.to eq 0 }
+  its(:stdout) { is_expected.to include 'System' }
+end
