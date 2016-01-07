@@ -26,6 +26,7 @@ set mail-format {
 set alert <%= @notify_email %><%= " NOT ON { #{@alert_blacklist.join(", ")} }" unless @alert_blacklist.empty? %>
 <%- end -%>
 
+<%- if @port -%>
 set httpd port <%= @port %>
   <%= "use address #{@address}" if @address %>
   <%- @allow.each do |a| -%>
@@ -36,3 +37,4 @@ set httpd port <%= @port %>
   ssl enable
   pemfile <%= @cert %>
   <%- end -%>
+<%- end -%>

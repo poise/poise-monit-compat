@@ -23,8 +23,12 @@ if node['monit']['eventqueue']['set']
 else
   node.force_override['poise-monit']['recipe']['var_path'] = false
 end
-# We're handling the HTTPD settings in the compat config.
-node.force_override['poise-monit']['recipe']['httpd_port'] = false
+# We're handling the HTTPD settings in the compat config if a password or allow is set.
+if node['monit']['password'] || !node['monit']['allow'].empty?
+  node.force_override['poise-monit']['recipe']['httpd_port'] = false
+else
+  node.force_override['monit']['port'] = false
+end
 
 # If no specific provider was requested, force it to use system.
 unless node['poise-monit']['monit'] && node['poise-monit']['monit']['provider']
