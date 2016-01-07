@@ -1,5 +1,4 @@
 <%- unless @notify_email.to_s.empty? -%>
-
 set mailserver <%= @mailserver['host'] %><%= " port #{@mailserver['port']}" if @mailserver['port'] %>
   <%- if @mailserver['hostname'] -%>
   using HOSTNAME "<%= @mailserver['hostname'] %>"
@@ -28,11 +27,15 @@ set alert <%= @notify_email %><%= " NOT ON { #{@alert_blacklist.join(", ")} }" u
 
 <%- if @port -%>
 set httpd port <%= @port %>
-  <%= "use address #{@address}" if @address %>
+  <%- if @address -%>
+  use address <%= @address %>
+  <%- end -%>
   <%- @allow.each do |a| -%>
   allow <%= a %>
   <%- end -%>
-  <%= "allow #{@username}:#{@password}" if @username %>
+  <%- if @username -%>
+  allow <%= @username %>:<%= @password %>
+  <%- end -%>
   <%- if @ssl -%>
   ssl enable
   pemfile <%= @cert %>

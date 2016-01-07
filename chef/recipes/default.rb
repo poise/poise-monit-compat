@@ -17,11 +17,11 @@
 # Transfer over node attributes as needed.
 node.force_override['poise-monit']['recipe']['daemon_interval'] = node['monit']['poll_period']
 node.force_override['poise-monit']['recipe']['logfile'] = node['monit']['logfile']
-if node['monit']['eventqueue']['set']
-  node.force_override['poise-monit']['recipe']['var_path'] = node['monit']['eventqueue']['basedir']
-  node.force_override['poise-monit']['recipe']['event_slots'] = node['monit']['eventqueue']['slots']
+node.force_override['poise-monit']['recipe']['var_path'] = node['monit']['eventqueue']['basedir']
+node.force_override['poise-monit']['recipe']['event_slots'] = if node['monit']['eventqueue']['set']
+  node['monit']['eventqueue']['slots']
 else
-  node.force_override['poise-monit']['recipe']['var_path'] = false
+  0
 end
 # We're handling the HTTPD settings in the compat config if a password or allow is set.
 if node['monit']['password'] || !node['monit']['allow'].empty?
@@ -36,6 +36,7 @@ unless node['poise-monit']['monit'] && node['poise-monit']['monit']['provider']
 end
 
 # Reset the cache.
+node.attributes.reset_cache('monit')
 node.attributes.reset_cache('poise-monit')
 
 include_recipe 'poise-monit'
