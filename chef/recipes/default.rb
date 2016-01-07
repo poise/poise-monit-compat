@@ -35,6 +35,9 @@ unless node['poise-monit']['monit'] && node['poise-monit']['monit']['provider']
   node.force_override['poise-monit']['monit']['provider'] = 'system'
 end
 
+# Reset the cache.
+node.attributes.reset_cache('poise-monit')
+
 include_recipe 'poise-monit'
 
 monit_config 'compat' do
