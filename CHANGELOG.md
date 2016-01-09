@@ -2,8 +2,8 @@
 
 ## v1.0.0
 
-Initial release.
+* Initial release.
 
 ## v0.7.5 and Earlier
 
-Can be found in the [old `monit` cookbook](https://github.com/apsoto/monit/).
+* Can be found in the [old `monit` cookbook](https://github.com/apsoto/monit/).
