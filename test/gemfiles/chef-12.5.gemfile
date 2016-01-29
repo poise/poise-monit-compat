@@ -14,17 +14,6 @@
 # limitations under the License.
 #
 
-source 'https://supermarket.chef.io/'
-extension 'halite'
+eval_gemfile File.expand_path('../../../Gemfile', __FILE__)
 
-# Force the rebuild every time for development.
-cookbook 'monit', gem: 'poise-monit-compat'
-cookbook 'poise', gem: 'poise'
-cookbook 'poise-languages', gem: 'poise-languages'
-cookbook 'poise-monit', gem: 'poise-monit'
-cookbook 'poise-service', gem: 'poise-service'
-
-group :test do
-  cookbook 'monit_test', path: 'test/cookbooks/monit_test'
-  cookbook 'apt'
-end
+gem 'chef', '~> 12.5.1'
