@@ -31,7 +31,7 @@ dev_gem 'halite'
 dev_gem 'poise'
 dev_gem 'poise-boiler'
 dev_gem 'poise-languages'
-dev_gem 'poise-monit'
+dev_gem 'poise-monit', github: 'poise/poise-monit'
 dev_gem 'poise-profiler'
 dev_gem 'poise-service'
 
