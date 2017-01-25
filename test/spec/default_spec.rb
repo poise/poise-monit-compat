@@ -90,13 +90,14 @@ EOH
   end # /context with complex httpd config
 
   context 'with a notification config' do
+    let(:chefspec_options) { {platform: 'ubuntu', version: '16.04'} }
     before { override_attributes['monit']['notify_email'] = 'admins@example.com' }
     it { is_expected.to render_file('/etc/monit/conf.d/compat.conf').with_content(<<-EOH) }
 set mailserver localhost
   with timeout 60 seconds
 
 set mail-format {
-  from: monit@chefspec.local
+  from: monit@fauxhai.local
   subject: $SERVICE $EVENT
   message: Monit $ACTION $SERVICE at $DATE on $HOST: $DESCRIPTION.
 Yours sincerely,
