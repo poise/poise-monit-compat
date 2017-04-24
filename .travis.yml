@@ -4,15 +4,22 @@ language: ruby
 env:
   global:
     - secure: Dufc0Srx4LQpRpC5I1q289DqTgDinTr+KyDeC09As1A6j6TcZdtvrHAEzuLUHLSdQODlORZQiin2Ub2FcxThv0t8fgOz6mP0zl5cri69V+xsIR7QcfzCQsyUCXWxvTQfrI3fRdfwY5yeHyBivsngwpY2wI6svqCFcvCs6NVI/9MtMrMU0jFnQfX3Q2wlNSDVpQ6HAFX5tyJyEe3h0RRF2KvXXW95Jd4VtjR/0rtjk9YiSDVy+LGSAT2T77FiC3SyGrCU4v0Oy5r/0V/UedHk+s8rXHhYhjBKG5atq/lb65U5ib3v86FECXJwOfu22ZoWsC4cxlVTF5GPrd3xm2ZYtZr1hZGGvLZqkgZNL6cEf9ExkcHvAxRN3Qtii3tYSwMf80IoMsTcZyk3aTLsfCJmOjDa+XHpRFhLFiPvntGNi3Ngzb7kcqDvoxzWLjNcbwm+phSLwA87h/kCJjKWi1DMBZ5DFPmUSd6LKRNXzWcV4qgmGSGv4holR3jk34rXebrsglNcMBaVjde9mTC2HVAQFxZTIjOssx96fJbFNMigXBvlUXOSzBoIBebY4RlkV4enmrQ6sG6o1ENuMlqlkb3AFekJoRlvUmG5uxF7QL2nrrQRwXFSMWCwAqzi74FJ58qIYs2b/6ISNNIFJBiV8DgqUbjI27+uY9uUMraVzYXodjQ=
-    - USE_SYSTEM_GECODE=true
-before_install: gem install bundler
-bundler_args: '--binstubs=$PWD/bin --jobs 3 --retry 3'
+before_install:
+  - 'if [[ $BUNDLE_GEMFILE == *master.gemfile ]]; then gem update --system; fi'
+  - gem --version
+  - gem install bundler
+  - bundle --version
+  - 'bundle config --local path ${BUNDLE_PATH:-$(dirname $BUNDLE_GEMFILE)/vendor/bundle}'
+  - bundle config --local bin $PWD/bin
+install: bundle update --jobs=3 --retry=3
 script:
   - ./bin/rake travis
 matrix:
   include:
     - rvm: 2.3.1
       gemfile: test/gemfiles/chef-12.gemfile
+    - rvm: 2.4.1
+      gemfile: test/gemfiles/chef-13.gemfile
     - rvm: 2.1.4
       gemfile: test/gemfiles/chef-12.1.gemfile
     - rvm: 2.1.4
@@ -48,8 +55,10 @@ matrix:
     - rvm: 2.3.1
       gemfile: test/gemfiles/chef-12.17.gemfile
     - rvm: 2.3.1
+      gemfile: test/gemfiles/chef-12.18.gemfile
+    - rvm: 2.3.1
+      gemfile: test/gemfiles/chef-12.19.gemfile
+    - rvm: 2.4.1
+      gemfile: test/gemfiles/chef-13.0.gemfile
+    - rvm: 2.4.1
       gemfile: test/gemfiles/master.gemfile
-addons:
-  apt:
-    packages:
-      - libgecode-dev
